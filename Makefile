@@ -1,6 +1,7 @@
 CC ?= cc
-CFLAGS ?= -O2 -Wall -Wextra -static
-LDFLAGS ?=
+CFLAGS ?= -O2 -Wall -Wextra
+LDFLAGS ?= -rdynamic
+LDLIBS += -ldl
 
 descend += src
 descend += desktop
@@ -8,6 +9,7 @@ descend += desktop
 export CC
 export CFLAGS
 export LDFLAGS
+export LDLIBS
 
 .PHONY: all clean $(descend)
 
