@@ -1,0 +1,22 @@
+# Object files
+*.o
+
+# Executables
+cserver
+
+# Build artifacts
+*.a
+*.so
+*.so.*
+
+# Debug symbols
+*.debug
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# IDE directories
+.vscode/
+.idea/
