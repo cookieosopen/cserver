@@ -3,6 +3,7 @@ CFLAGS ?= -O2 -Wall -Wextra -static
 LDFLAGS ?=
 
 descend += src
+descend += desktop
 
 export CC
 export CFLAGS

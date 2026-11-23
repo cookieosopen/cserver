@@ -1,7 +1,9 @@
 CC ?= cc
 AR ?= ar
 
-CPPFLAGS += -I../include
+CPPFLAGS += -I../include $(shell pkg-config --cflags libdrm)
+LDLIBS += $(shell pkg-config --libs libdrm)
+
 CFLAGS ?= -O2 -Wall -Wextra
 
 descend += libcsrv
@@ -17,7 +19,7 @@ $(descend):
 
 ../cserver: $(obj-y)
 	@echo "LD      $@"
-	@$(CC) $(LDFLAGS) -o $@ $(obj-y)
+	@$(CC) $(LDFLAGS) -o $@ $(obj-y) $(LDLIBS)
 
 %.o: %.c
 	@echo "CC      $<"
