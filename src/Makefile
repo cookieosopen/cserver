@@ -1,10 +1,19 @@
+CC ?= cc
+AR ?= ar
+
 CPPFLAGS += -I../include
+CFLAGS ?= -O2 -Wall -Wextra
 
-obj-y += $(patsubst %.c,%.o,$(shell find . -type f -name '*.c' -print))
+descend += libcsrv
 
-.PHONY: all clean
+obj-y += $(patsubst %.c,%.o,$(shell find . -maxdepth 1 -type f -name '*.c' -print))
 
-all: ../cserver
+.PHONY: all clean $(descend)
+
+all: $(descend) ../cserver
+
+$(descend):
+	@$(MAKE) -C $@ all
 
 ../cserver: $(obj-y)
 	@echo "LD      $@"
@@ -16,3 +25,6 @@ all: ../cserver
 
 clean:
 	@rm -f $(obj-y) ../cserver
+	@for dir in $(descend); do \
+		$(MAKE) -C $$dir clean; \
+	done
