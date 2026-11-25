@@ -1,4 +1,4 @@
-#include <libcsrv/client.h>
+#include <libcsrv/csrv.h>
 
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -6,7 +6,6 @@
 #include <stddef.h>
 #include <string.h>
 
-#define CSRV_SOCKET_PATH "/run/cserver.sock"
 
 int csrv_connect(csrv_connection *connection)
 {
