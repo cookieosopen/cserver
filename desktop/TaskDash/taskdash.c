@@ -14,6 +14,8 @@
 #define TASKDASH_ACCENT     0x4285f4
 #define TASKDASH_BUTTON     0x353b46
 
+void taskdash_draw_icon(uint32_t x, uint32_t y);
+
 enum taskdash_location {
     TASKDASH_TOP,
     TASKDASH_BOTTOM,
@@ -136,32 +138,9 @@ static void taskdash_draw(void)
 
     if (taskdash_location == TASKDASH_TOP ||
         taskdash_location == TASKDASH_BOTTOM) {
-
-        csrv_desktop_fill_rect(
-            8, y + 8,
-            24, 24,
-            TASKDASH_BUTTON
-        );
-
-        csrv_desktop_fill_rect(
-            17, y + 15,
-            6, 10,
-            TASKDASH_ACCENT
-        );
-
+            taskdash_draw_icon(8, y + 8);
     } else {
-
-        csrv_desktop_fill_rect(
-            x + 8, 8,
-            48, 48,
-            TASKDASH_BUTTON
-        );
-
-        csrv_desktop_fill_rect(
-            x + 27, 25,
-            10, 16,
-            TASKDASH_ACCENT
-        );
+        taskdash_draw_icon(x + 8, 8);
     }
 
     /*

@@ -4,6 +4,7 @@ CPPFLAGS += -I../../include
 CFLAGS += -Wall -Wextra -O2 -fPIC
 
 obj-y += taskdash.o
+obj-y += icon.o
 
 .PHONY: all clean
 
