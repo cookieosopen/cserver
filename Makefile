@@ -5,6 +5,7 @@ LDLIBS += -ldl
 
 descend += src
 descend += desktop
+descend += applications
 
 export CC
 export CFLAGS
@@ -22,3 +23,5 @@ clean:
 	@for dir in $(descend); do \
 		$(MAKE) -C $$dir clean; \
 	done
+
+include install.mk

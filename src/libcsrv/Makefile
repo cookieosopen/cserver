@@ -1,22 +1,21 @@
 CC ?= cc
-AR ?= ar
 
 CPPFLAGS += -I../../include
-CFLAGS ?= -O2 -Wall -Wextra
+CFLAGS += -Wall -Wextra -O2 -fPIC
 
 obj-y += $(patsubst %.c,%.o,$(shell find . -type f -name '*.c' -print))
 
-.PHONY: all clean
+.PHONY: all clean install
 
-all: libcsrv.a
+all: libcsrv.so
 
-libcsrv.a: $(obj-y)
-	@echo "AR      $@"
-	@$(AR) rcs $@ $(obj-y)
+libcsrv.so: $(obj-y)
+	@echo "LD      $@"
+	@$(CC) -shared -Wl,-soname,libcsrv.so $(LDFLAGS) -o $@ $(obj-y) $(LDLIBS)
 
 %.o: %.c
 	@echo "CC      $<"
-	@$(CC) $(CPPFLAGS) $(CFLAGS) -fPIC -c $< -o $@
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(obj-y) libcsrv.a
+	@rm -f $(obj-y) libcsrv.a libcsrv.so
